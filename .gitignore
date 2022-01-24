@@ -1,0 +1,5 @@
+# Virtual Environment
+env
+
+# VS Code Workspace
+.vscode

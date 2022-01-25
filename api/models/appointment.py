@@ -9,14 +9,16 @@ class AppointmentModel(db.Model):
     location = db.Column(db.String)
 
     course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+    course = db.relationship("CourseModel")
 
-    def __init__(self, unique_name, course, location):
+    def __init__(self, unique_name, course, location, course_id):
         """
         Constructor for AppointmentModel
         """
         self.unique_name = unique_name
         self.course = course
         self.location = location
+        self.course_id = course_id
 
     def json(self):
         """

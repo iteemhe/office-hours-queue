@@ -24,6 +24,12 @@ class Appointment(Resource):
         required=True,
         help="This field cannot be empty",
     )
+    parse.add_argument(
+        "course_id",
+        type=int,
+        required=True,
+        help="This field cannot be empty",
+    )
 
     def get(self):
         return {

@@ -56,3 +56,11 @@ class Course(Resource):
         if course:
             course.delete_from_db()
         return {"message": "Course deleted successfully"}
+
+
+class CourseList(Resource):
+    def get(self):
+        courses = CourseModel.query.all()
+        if courses:
+            return {"courses": [list(map(lambda x: x.json(), courses))]}
+        return {"courses": []}

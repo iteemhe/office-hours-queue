@@ -8,6 +8,10 @@ class CourseModel(db.Model):
     course_name = db.Column(db.String)
     is_open = db.Column(db.Boolean, default=False)
 
+    appointments = db.relationship(
+        "AppointmentModel", lazy="dynamic"  # improve performance
+    )
+
     def __init__(self, course_name, is_open):
         self.course_name = course_name
         self.is_open = is_open
@@ -16,6 +20,15 @@ class CourseModel(db.Model):
         return {
             "course_name": self.course_name,
             "is_open": self.is_open,
+            "appointments": [
+                list(
+                    map(
+                        lambda x: x.json(),
+                        self.appointments.all(),
+                        # appointments is a query now, not an object
+                    )
+                )
+            ],
         }
 
     @classmethod

@@ -1,2 +1,1 @@
 web: uwsgi uwsgi.ini
-

@@ -23,9 +23,9 @@ app.secret_key = "a very strong password"
 api = Api(app)
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
 
 
 jwt = JWT(app, authenticate, identity)  # /auth endpoint
@@ -44,6 +44,6 @@ api.add_resource(Appointment, "/appointment")
 api.add_resource(Course, "/course/<string:course_name>")
 api.add_resource(CourseList, "/courses")
 
-if __name__ == "__main__":
-    db.init_app(app)
-    app.run(port=5000, debug=True)
+# if __name__ == "__main__":
+#     db.init_app(app)
+# app.run(port=5000, debug=True)

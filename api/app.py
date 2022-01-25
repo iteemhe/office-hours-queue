@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
+from resources.course import Course, CourseList
 
 from security import authenticate, identity
 from resources.user import User, UserRegister
@@ -21,18 +22,21 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "a very strong password"
 api = Api(app)
 
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
-
 jwt = JWT(app, authenticate, identity)  # /auth endpoint
 
+# CRUD for user, and regisration
 api.add_resource(User, "/user/<string:unique_name>")
 api.add_resource(UserRegister, "/register")
+
+# Haven't decided yet
 api.add_resource(Queue, "/queue/<string:course>")
+
+# CRUD for appointments
 api.add_resource(Appointment, "/appointment")
+
+# CRUD for courses
+api.add_resource(Course, "/course/<string:course_name>")
+api.add_resource(CourseList, "/courses")
 
 if __name__ == "__main__":
     db.init_app(app)

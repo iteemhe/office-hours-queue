@@ -8,6 +8,8 @@ class AppointmentModel(db.Model):
     course = db.Column(db.String)
     location = db.Column(db.String)
 
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"))
+
     def __init__(self, unique_name, course, location):
         """
         Constructor for AppointmentModel

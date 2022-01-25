@@ -37,13 +37,14 @@ class User(Resource):
             user.first_name = data["first_name"]
             user.is_admin = data["is_admin"]
         else:
-            user = UserModel(
-                data["unique_name"],
-                data["name"],
-                data["first_name"],
-                data["is_admin"],
-                data["password"],
-            )
+            # user = UserModel(
+            #     data["unique_name"],
+            #     data["name"],
+            #     data["first_name"],
+            #     data["is_admin"],
+            #     data["password"],
+            # )
+            user = UserModel(**data)
         user.save_to_db()
         return user.json(), 202
 

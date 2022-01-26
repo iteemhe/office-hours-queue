@@ -1,12 +1,15 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
-from resources.course import Course, CourseList
 
-from security import authenticate, identity
+from resources.course import Course, CourseList
 from resources.user import User, UserRegister
 from resources.queue import Queue
 from resources.appointment import Appointment
+
+from security import authenticate, identity
 from db import db
 
 """
@@ -17,7 +20,10 @@ Driver program for the RESTful CRUD API
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    "DATABASE_URL",  # Heroku env
+    "sqlite:///data.db",  # default path for local test
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "a very strong password"
 api = Api(app)

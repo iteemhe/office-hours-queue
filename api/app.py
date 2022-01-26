@@ -23,7 +23,8 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
     "DATABASE_URL",  # Heroku env
     "sqlite:///data.db",  # default path for local test
-)
+).replace("postgres", "postgresql")
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "a very strong password"
 api = Api(app)

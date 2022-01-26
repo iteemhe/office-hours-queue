@@ -1,6 +1,9 @@
 from db import db
 from app import app
 
+"""
+Run Flask API in Heroku env
+"""
 
 db.init_app(app)
 
@@ -12,4 +15,4 @@ def create_tables():
 
 # if __name__ == "__main__":
 
-#     app.run()
+# app.run(port=5000, debug=True)
